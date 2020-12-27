@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Todo from './Todo';
+import NewTask from './NewTask';
+import List from './List';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      itemArray: []
+    }
+    this.addItem = this.addItem.bind(this)
+  }
+  addItem(item) {
+    this.setState({
+      itemArray: [...this.state.itemArray, item],
+    })
+  }
+  render() {
+
+    return (
+      <div className="App">
+        <h1>My to-do list:</h1>
+        <NewTask add={this.addItem}/>
+        <List itemArray={this.state.itemArray}/>
+      </div>
+    );
+  }
 }
 
 export default App;
